@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCraft Templates - Professional Web Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary: #01D26D;
+            --secondary: #01A758;
+            --accent: #01D26D;
+            --light: #121212;
+            --dark: #ffffff;
+            --success: #01D26D;
+            --danger: #ff4757;
+            --warning: #ffa502;
+            --info: #2ed573;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Subtle Background Pattern */
+        .background-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 80%, rgba(1, 210, 109, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(1, 167, 88, 0.05) 0%, transparent 50%);
+            animation: backgroundShift 30s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(20px) translateY(-20px); }
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(1, 210, 109, 0.2);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 25px;
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .nav-links a:hover::before {
+            opacity: 0.2;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 50%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.6s forwards;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--light);
+            box-shadow: 0 10px 30px rgba(1, 210, 109, 0.3);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(1, 210, 109, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 20px rgba(1, 210, 109, 0.2);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--light);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(1, 210, 109, 0.4);
+        }
+
+        /* Template-Focused Visualization */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 500px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.8s forwards;
+        }
+
+        .template-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Central Template Preview */
+        .template-preview {
+            position: absolute;
+            width: 200px;
+            height: 240px;
+            border: 3px solid var(--primary);
+            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(1, 210, 109, 0.1), rgba(1, 167, 88, 0.1));
+            box-shadow: 0 0 40px rgba(1, 210, 109, 0.4);
+            animation: templateFloat 6s ease-in-out infinite;
+            overflow: hidden;
+        }
+
+        .template-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 12px 12px 0 0;
+        }
+
+        .template-preview::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 8px;
+            height: 8px;
+            background: var(--dark);
+            border-radius: 50%;
+            box-shadow: 15px 0 0 var(--dark), 30px 0 0 var(--dark);
+        }
+
+        /* Template Content Lines */
+        .template-line {
+            position: absolute;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            border-radius: 2px;
+            animation: templatePulse 3s ease-in-out infinite;
+        }
+
+        .line-header {
+            top: 50px;
+            left: 20px;
+            width: 120px;
+            height: 15px;
+            background: rgba(1, 210, 109, 0.3);
+            animation-delay: 0s;
+        }
+
+        .line-1 {
+            top: 80px;
+            left: 20px;
+            width: 150px;
+            animation-delay: 0.5s;
+        }
+
+        .line-2 {
+            top: 95px;
+            left: 20px;
+            width: 130px;
+            animation-delay: 1s;
+        }
+
+        .line-3 {
+            top: 110px;
+            left: 20px;
+            width: 110px;
+            animation-delay: 1.5s;
+        }
+
+        .line-4 {
+            top: 140px;
+            left: 20px;
+            width: 160px;
+            animation-delay: 2s;
+        }
+
+        .line-5 {
+            top: 155px;
+            left: 20px;
+            width: 140px;
+            animation-delay: 2.5s;
+        }
+
+        .line-6 {
+            top: 170px;
+            left: 20px;
+            width: 120px;
+            animation-delay: 3s;
+        }
+
+        /* Template Button */
+        .template-button {
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+            width: 100px;
+            height: 25px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            animation: buttonGlow 2s ease-in-out infinite;
+        }
+
+        /* Orbiting Performance Cards */
+        .orbit-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: orbitRotate 30s linear infinite;
+        }
+
+        .performance-card {
+            position: absolute;
+            background: rgba(18, 18, 18, 0.95);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(1, 210, 109, 0.3);
+            min-width: 90px;
+            text-align: center;
+            animation: cardCounter 30s linear infinite;
+        }
+
+        .performance-card h4 {
+            font-size: 0.7rem;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .performance-card .metric {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .performance-card p {
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+        }
+
+        /* Position cards around the orbit */
+        .card-performance {
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-color: var(--primary);
+        }
+
+        .card-speed {
+            top: 35%;
+            right: 10%;
+            border-color: var(--secondary);
+        }
+
+        .card-responsive {
+            bottom: 35%;
+            right: 10%;
+            border-color: var(--accent);
+        }
+
+        .card-score {
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-color: var(--primary);
+        }
+
+        .card-seo {
+            bottom: 35%;
+            left: 10%;
+            border-color: var(--secondary);
+        }
+
+        .card-security {
+            top: 35%;
+            left: 10%;
+            border-color: var(--accent);
+        }
+
+        /* Template Type Indicators */
+        .template-type {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            background: rgba(1, 210, 109, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: var(--primary);
+            animation: typeFloat 8s ease-in-out infinite;
+        }
+
+        .type-1 {
+            top: 8%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .type-2 {
+            top: 25%;
+            right: 12%;
+            animation-delay: 2s;
+        }
+
+        .type-3 {
+            bottom: 25%;
+            right: 12%;
+            animation-delay: 4s;
+        }
+
+        .type-4 {
+            bottom: 8%;
+            left: 15%;
+            animation-delay: 6s;
+        }
+
+        /* Connection Lines */
+        .connection-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(1, 210, 109, 0.4), transparent);
+            animation: connectionPulse 4s ease-in-out infinite;
+        }
+
+        .connect-1 {
+            top: 30%;
+            left: 25%;
+            width: 50px;
+            transform: rotate(45deg);
+            animation-delay: 0s;
+        }
+
+        .connect-2 {
+            top: 45%;
+            right: 20%;
+            width: 60px;
+            transform: rotate(-45deg);
+            animation-delay: 1s;
+        }
+
+        .connect-3 {
+            bottom: 30%;
+            right: 25%;
+            width: 45px;
+            transform: rotate(45deg);
+            animation-delay: 2s;
+        }
+
+        .connect-4 {
+            bottom: 45%;
+            left: 20%;
+            width: 55px;
+            transform: rotate(-45deg);
+            animation-delay: 3s;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes templateFloat {
+            0%, 100% { 
+                transform: translateY(0px) scale(1);
+                box-shadow: 0 0 40px rgba(1, 210, 109, 0.4);
+            }
+            50% { 
+                transform: translateY(-15px) scale(1.02);
+                box-shadow: 0 0 60px rgba(1, 210, 109, 0.6);
+            }
+        }
+
+        @keyframes templatePulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes buttonGlow {
+            0%, 100% { 
+                box-shadow: 0 0 10px rgba(1, 210, 109, 0.5);
+            }
+            50% { 
+                box-shadow: 0 0 20px rgba(1, 210, 109, 0.8);
+            }
+        }
+
+        @keyframes orbitRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes cardCounter {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
+
+        @keyframes typeFloat {
+            0%, 100% { 
+                transform: translateY(0px);
+                box-shadow: 0 0 15px rgba(1, 210, 109, 0.3);
+            }
+            50% { 
+                transform: translateY(-10px);
+                box-shadow: 0 0 25px rgba(1, 210, 109, 0.5);
+            }
+        }
+
+        @keyframes connectionPulse {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem 0;
+            background: rgba(18, 18, 18, 0.8);
+            border-top: 1px solid rgba(1, 210, 109, 0.2);
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem;
+            background: rgba(18, 18, 18, 0.9);
+            border: 1px solid rgba(1, 210, 109, 0.3);
+            border-radius: 12px;
+            backdrop-filter: blur(20px);
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(1, 210, 109, 0.3);
+            border-color: var(--primary);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-visual {
+                height: 350px;
+            }
+
+            .template-container {
+                width: 280px;
+                height: 280px;
+            }
+
+            .template-preview {
+                width: 160px;
+                height: 200px;
+            }
+
+            .performance-card {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .template-type {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Subtle Background Pattern -->
+    <div class="background-pattern"></div>
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <i class="fas fa-cube"></i>
+                <span>GCraftTemplates</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#templates">Templates</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="https://gcraft.tech/discuss-project">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Professional Web Templates for Modern Businesses</h1>
+                    <p>Create stunning, responsive websites with our carefully crafted templates. Built with modern technologies and best practices for optimal performance and user experience.</p>
+                    <div class="hero-buttons">
+                        <a href="#templates" class="btn btn-primary">
+                            <i class="fas fa-rocket"></i>
+                            Explore Templates
+                        </a>
+                        <a href="https://gcraft.tech/" class="btn btn-outline">
+                            <i class="fas fa-play"></i>
+                            View Demo
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="template-container">
+                        <!-- Central Template Preview -->
+                        <div class="template-preview">
+                            <div class="template-line line-header"></div>
+                            <div class="template-line line-1"></div>
+                            <div class="template-line line-2"></div>
+                            <div class="template-line line-3"></div>
+                            <div class="template-line line-4"></div>
+                            <div class="template-line line-5"></div>
+                            <div class="template-line line-6"></div>
+                            <div class="template-button"></div>
+                        </div>
+
+                        <!-- Orbiting Performance Cards -->
+                        <div class="orbit-container">
+                            <div class="performance-card card-performance">
+                                <h4>Performance</h4>
+                                <div class="metric">A+</div>
+                            </div>
+
+                            <div class="performance-card card-responsive">
+                                <h4>Responsive</h4>
+                                <div class="metric">100%</div>
+                            </div>
+                             <div class="performance-card card-score">
+                                <h4>Score</h4>
+                                <div class="metric">99/100</div>
+                            </div>
+
+                            <div class="performance-card card-security">
+                                <h4>Security</h4>
+                                <div class="metric">100%</div>
+                            </div>
+                        </div>
+
+                        <!-- Template Type Indicators -->
+                        <div class="template-type type-1"><i class="fas fa-store"></i></div>
+                        <div class="template-type type-2"><i class="fas fa-briefcase"></i></div>
+                        <div class="template-type type-3"><i class="fas fa-blog"></i></div>
+                        <div class="template-type type-4"><i class="fas fa-palette"></i></div>
+
+                        <!-- Connection Lines -->
+                        <div class="connection-line connect-1"></div>
+                        <div class="connection-line connect-2"></div>
+                        <div class="connection-line connect-3"></div>
+                        <div class="connection-line connect-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Templates Created</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10k+</div>
+                    <div class="stat-label">Happy Customers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">99.8%</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Add smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(18, 18, 18, 0.95)';
+                header.style.borderBottom = '1px solid rgba(1, 210, 109, 0.4)';
+            } else {
+                header.style.background = 'rgba(18, 18, 18, 0.9)';
+                header.style.borderBottom = '1px solid rgba(1, 210, 109, 0.2)';
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Animate stats on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const finalValue = stat.textContent;
+                        const isPercentage = finalValue.includes('%');
+                        const isGrade = finalValue.includes('+') || finalValue.includes('A');
+                        const isTime = finalValue.includes('s') || finalValue.includes('/');
+                        
+                        if (!isGrade && !isTime) {
+                            let currentValue = 0;
+                            const targetValue = parseInt(finalValue.replace(/[^\d]/g, ''));
+                            const increment = Math.ceil(targetValue / 50);
+                            
+                            const updateValue = () => {
+                                currentValue += increment;
+                                if (currentValue >= targetValue) {
+                                    stat.textContent = finalValue;
+                                } else {
+                                    const suffix = isPercentage ? '%' : (finalValue.includes('k') ? 'k+' : '+');
+                                    stat.textContent = currentValue + suffix;
+                                    requestAnimationFrame(updateValue);
+                                }
+                            };
+                            
+                            updateValue();
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe stats section
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+    </script>
+</body>
+</html>
